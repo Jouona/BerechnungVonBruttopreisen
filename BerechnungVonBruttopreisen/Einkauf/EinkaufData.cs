@@ -1,4 +1,6 @@
-﻿namespace BerechnungVonBruttopreisen;
+﻿using BerechnungVonBruttopreisen.Utilities;
+
+namespace BerechnungVonBruttopreisen;
 
 public class EinkaufData {
     public float NettopreisDesArtikels { get; private set; }

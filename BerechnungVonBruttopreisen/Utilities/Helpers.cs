@@ -1,4 +1,4 @@
-﻿namespace BerechnungVonBruttopreisen;
+﻿namespace BerechnungVonBruttopreisen.Utilities;
 
 public class Helpers {
     public static int IntEingabeLesen(bool allowNegative = false, IEnumerable<int> enabledValues = null) {

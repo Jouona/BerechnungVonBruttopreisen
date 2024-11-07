@@ -1,15 +1,15 @@
-﻿namespace BerechnungVonBruttopreisen;
+﻿using BerechnungVonBruttopreisen.Utilities;
+
+namespace BerechnungVonBruttopreisen;
 
 public class KundenSpeicher : SingletonBase<KundenSpeicher> {
     Dictionary<int, Kunde> kundenMap = new();
 
     public Kunde? GetKunde(int id) {
-        if (!kundenMap.ContainsKey(id)) {
-            Console.WriteLine("Für diese ID ist kein Kundeneintrag gespeichert");
-            return null;
-        }
+        if (kundenMap.ContainsKey(id)) return kundenMap[id];
 
-        return kundenMap[id];
+        Console.WriteLine("Für diese ID ist kein Kundeneintrag gespeichert");
+        return null;
     }
 
     public void RegisterKunde(Kunde kunde, int id) {
@@ -18,10 +18,10 @@ public class KundenSpeicher : SingletonBase<KundenSpeicher> {
         }
 
         if (kundenMap.ContainsKey(id)) {
-            Console.WriteLine($"Kunde {id} is already registered");
-            int newID = GetUnusedID();
-            Console.WriteLine($"Defaulting to unused ID: {newID}");
-            kundenMap.Add(newID, kunde);
+            Console.WriteLine($"This {id} is already used by a different customer");
+            int unusedId = GetUnusedID();
+            Console.WriteLine($"Defaulting to unused ID: {unusedId}");
+            kundenMap.Add(unusedId, kunde);
             return;
         }
 

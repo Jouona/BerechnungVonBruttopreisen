@@ -10,7 +10,7 @@ class Program {
         KundenSpeicher.Instance.RegisterKunde(eichner, 4712);
         Kunde utechner = new Kunde("Uchner", false);
         KundenSpeicher.Instance.RegisterKunde(utechner, 4713);
-        Kunde jona = new Kunde("Jona");
+        Kunde jona = new Kunde("Jona"); // autoRegister will put id to first unused value, which in this case is 0
 
         KundenSpeicher.Instance.AllowTreueBonusByID(4711);
         KundenSpeicher.Instance.AllowTreueBonusByID(4712);

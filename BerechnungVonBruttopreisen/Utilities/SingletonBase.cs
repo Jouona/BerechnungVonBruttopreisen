@@ -1,4 +1,4 @@
-﻿namespace BerechnungVonBruttopreisen;
+﻿namespace BerechnungVonBruttopreisen.Utilities;
 
 public abstract class SingletonBase<T> where T : class, new() {
     static readonly object lockObject = new();

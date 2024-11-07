@@ -1,4 +1,6 @@
-﻿namespace BerechnungVonBruttopreisen;
+﻿using BerechnungVonBruttopreisen.Utilities;
+
+namespace BerechnungVonBruttopreisen;
 
 public class Kunde {
     internal List<Einkauf> GetätigteEinkäufe { get; private set; } = new();
@@ -22,12 +24,14 @@ public class Kunde {
 
 public class EinkaufHandler : SingletonBase<EinkaufHandler> {
     public void RegisterEinkauf(Einkauf einkauf) {
-        if (KundenSpeicher.Instance.GetKunde(einkauf.Kundennummer) == null) {
+        Kunde? käuferKunde = KundenSpeicher.Instance.GetKunde(einkauf.Kundennummer);
+        if (käuferKunde == null) {
             Console.WriteLine("Kunde nicht registriert.");
             return;
         }
 
-        KundenSpeicher.Instance.GetKunde(einkauf.Kundennummer)?.GetätigteEinkäufe.Add(einkauf);
+
+        käuferKunde.GetätigteEinkäufe.Add(einkauf);
         Console.WriteLine(
             $"Der Einkauf von Kunde {KundenSpeicher.Instance.GetKunde(einkauf.Kundennummer)?.Name} mit der Kundennummer " +
             $"von {einkauf.Kundennummer} kostete {einkauf.Rechnungsbetrag}");
