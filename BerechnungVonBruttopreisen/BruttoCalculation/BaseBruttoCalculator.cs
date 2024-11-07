@@ -2,11 +2,18 @@
 
 public class BaseBruttoCalculator : ICalculateBrutto {
     public float GetBrutto(EinkaufData data) {
-        float brutto = data.AnzahlDesArtikels * data.NettopreisDesArtikels;
-        if (KundenSpeicher.Instance.GetKunde(data.Kundennummer).Treuebonus) {
-            brutto -= 10;
+        float summe = data.AnzahlDesArtikels * data.NettopreisDesArtikels;
+        if (summe >= 25f) {
+            summe *= 0.95f;
+        }
+        else if (summe >= 500f) {
+            summe *= 0.9f;
         }
 
-        return brutto;
+        if (KundenSpeicher.Instance.GetKunde(data.Kundennummer).Treuebonus) {
+            summe *= 0.97f;
+        }
+
+        return summe;
     }
 }
