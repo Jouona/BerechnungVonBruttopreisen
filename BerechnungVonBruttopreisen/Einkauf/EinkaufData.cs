@@ -14,6 +14,8 @@ public class EinkaufData : IValidator {
         AnzahlDesArtikels = anzahlDesArtikels;
         Kundennummer = kundennummer;
         MehrwertSteuerSatz = mehrwertSteuerSatz;
+
+        Validate();
     }
 
     public static EinkaufDataBuilder Create() {
