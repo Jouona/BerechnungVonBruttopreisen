@@ -16,7 +16,7 @@ class Program {
         KundenSpeicher.Instance.AllowTreueBonusByID(4712);
         KundenSpeicher.Instance.AllowTreueBonusByID(4713);
 
-        EinkaufData einkaufData = EinkaufData.Create().WithAllManually().Build();
+        EinkaufData einkaufData = EinkaufData.Create().WithAllReadLine().Build();
 
         Kunde.EinkaufHandler.Instance.RegisterEinkauf(new Einkauf(einkaufData, calculator));
     }

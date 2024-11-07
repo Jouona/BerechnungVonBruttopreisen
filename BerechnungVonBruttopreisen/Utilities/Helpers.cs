@@ -11,11 +11,13 @@ public class Helpers {
             }
 
             if (enabledValues != null && !enabledValues.Contains(ausgangszahl)) {
-                throw new Exception("Needs to be an enabled value");
+                throw new Exception(
+                    $"Needs to be an enabled value. Enabled values: {string.Join(",", enabledValues)}");
             }
 
             if (disabledValues != null && disabledValues.Contains(ausgangszahl)) {
-                throw new Exception("Wert darf kein ausgeschlossener Wert sein");
+                throw new Exception(
+                    $"Wert darf kein ausgeschlossener Wert sein. Disabled values: {string.Join(",", disabledValues)}");
             }
         }
         catch (Exception e) {
@@ -36,11 +38,12 @@ public class Helpers {
             }
 
             if (enabledValues != null && !enabledValues.Contains(ausgangszahl)) {
-                throw new Exception("Needs to be an enabled value");
+                throw new Exception($"Needs to be an enabled value. Enabled values: {string.Join(",", enabledValues)}");
             }
 
             if (disabledValues != null && disabledValues.Contains(ausgangszahl)) {
-                throw new Exception("Wert darf kein ausgeschlossener Wert sein");
+                throw new Exception(
+                    $"Wert darf kein ausgeschlossener Wert sein. Disables values: {string.Join(",", disabledValues)}");
             }
         }
         catch (Exception e) {

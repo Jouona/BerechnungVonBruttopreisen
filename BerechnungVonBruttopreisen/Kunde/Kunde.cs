@@ -34,7 +34,6 @@ public class Kunde : IValidator {
                 Console.WriteLine("Enter new name");
                 Name = Console.ReadLine();
                 return Validate();
-                return false;
             default:
                 return true;
         }
@@ -52,7 +51,7 @@ public class Kunde : IValidator {
             käuferKunde.GetätigteEinkäufe.Add(einkauf);
             Console.WriteLine(
                 $"Der Einkauf von Kunde {KundenSpeicher.Instance.GetKunde(einkauf.Kundennummer)?.Name} mit der Kundennummer " +
-                $"von {einkauf.Kundennummer} kostete {einkauf.Rechnungsbetrag}");
+                $"von {einkauf.Kundennummer} kostete {einkauf.Rechnungsbetrag} Euro");
         }
     }
 }

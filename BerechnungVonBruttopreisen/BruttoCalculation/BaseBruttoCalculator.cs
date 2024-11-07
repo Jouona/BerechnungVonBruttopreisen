@@ -2,7 +2,7 @@
 
 public class BaseBruttoCalculator : ICalculateBrutto {
     public float GetBrutto(EinkaufData data) {
-        float summe = data.AnzahlDesArtikels * data.NettopreisDesArtikels;
+        float summe = data.AnzahlDesArtikels * data.NettopreisDesArtikels * (1f + data.MehrwertSteuerSatz / 100);
         if (summe >= 25f) {
             summe *= 0.95f;
         }
@@ -14,6 +14,6 @@ public class BaseBruttoCalculator : ICalculateBrutto {
             summe *= 0.97f;
         }
 
-        return summe;
+        return MathF.Round(summe, 2);
     }
 }
