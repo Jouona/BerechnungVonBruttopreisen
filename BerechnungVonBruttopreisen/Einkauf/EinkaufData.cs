@@ -92,15 +92,6 @@ public class EinkaufData : IValidator {
             return this;
         }
 
-        public EinkaufDataBuilder WithKundennummer(int kundennummer) {
-            kundennummer = kundennummer;
-            if (KundenSpeicher.Instance.GetKunde(kundennummer) == null) {
-                throw new Exception("Diese kundennummer ist nicht eingetragen");
-            }
-
-            return this;
-        }
-
         public EinkaufData Build() {
             return new EinkaufData(nettopreisDesArtikels, anzahlDesArtikels, kundennummer, mehrwertSteuerSatz);
         }
