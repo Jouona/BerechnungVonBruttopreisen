@@ -2,10 +2,11 @@
 
 namespace BerechnungVonBruttopreisen;
 
-public class EinkaufData {
+public class EinkaufData : IValidator {
     public float NettopreisDesArtikels { get; private set; }
     public int AnzahlDesArtikels { get; private set; }
     public int Kundennummer { get; private set; }
+    public float MehrwertSteuerSatz { get; private set; }
 
     private EinkaufData(float nettopreisDesArtikels, int anzahlDesArtikels, int kundennummer) {
         NettopreisDesArtikels = nettopreisDesArtikels;
@@ -15,6 +16,40 @@ public class EinkaufData {
 
     public static EinkaufDataBuilder Create() {
         return new EinkaufDataBuilder();
+    }
+
+    public bool Validate() {
+        if (NettopreisDesArtikels <= 0) {
+            Console.WriteLine($"Negative values {NettopreisDesArtikels} not allowed as Nettopreis des Artikels");
+            NettopreisDesArtikels = Helpers.FloatEingabeLesen(false);
+            return false;
+        }
+
+        if (AnzahlDesArtikels < 0) {
+            Console.WriteLine($"Negative values {AnzahlDesArtikels} not allowed as Anzahl des Artikels");
+            AnzahlDesArtikels = Helpers.IntEingabeLesen(false);
+            return false;
+        }
+
+        if (Kundennummer < 0) {
+            Console.WriteLine($"Negative values {Kundennummer} not allowed as Kundennummer");
+            Kundennummer = Helpers.IntEingabeLesen(false, [], KundenSpeicher.Instance.GetKundenIds());
+            return false;
+        }
+
+        if (KundenSpeicher.Instance.GetKundenIds().Contains(Kundennummer)) {
+            Console.WriteLine($"Kundenummer {Kundennummer} is already registered");
+            Kundennummer = Helpers.IntEingabeLesen(false, [], KundenSpeicher.Instance.GetKundenIds());
+            return false;
+        }
+
+        if (this.MehrwertSteuerSatz is not (0f or 7f or 19f)) {
+            Console.WriteLine("MehrwertSteuerSatz is not a valid value. Needs to be 0, 7, or 19");
+            MehrwertSteuerSatz = Helpers.FloatEingabeLesen(false, [0f, 7f, 19f]);
+            return false;
+        }
+
+        return true;
     }
 
     public class EinkaufDataBuilder {

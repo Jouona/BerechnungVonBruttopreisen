@@ -1,7 +1,8 @@
 ﻿namespace BerechnungVonBruttopreisen.Utilities;
 
 public class Helpers {
-    public static int IntEingabeLesen(bool allowNegative = false, IEnumerable<int> enabledValues = null) {
+    public static int IntEingabeLesen(bool allowNegative = false, IEnumerable<int> enabledValues = null,
+        IEnumerable<int> disabledValues = null) {
         int ausgangszahl = 0;
         try {
             ausgangszahl = Convert.ToInt32(Console.ReadLine());
@@ -12,6 +13,10 @@ public class Helpers {
             if (enabledValues != null && !enabledValues.Contains(ausgangszahl)) {
                 throw new Exception("Needs to be an enabled value");
             }
+
+            if (disabledValues != null && disabledValues.Contains(ausgangszahl)) {
+                throw new Exception("Wert darf kein ausgeschlossener Wert sein");
+            }
         }
         catch (Exception e) {
             Console.WriteLine(e.Message);
@@ -21,17 +26,26 @@ public class Helpers {
         return ausgangszahl;
     }
 
-    public static float FloatEingabeLesen(bool allowNegative = false) {
-        float ausgangszahl = 0;
+    public static float FloatEingabeLesen(bool allowNegative = false, IEnumerable<float> enabledValues = null,
+        IEnumerable<float> disabledValues = null) {
+        float ausgangszahl = 0f;
         try {
-            ausgangszahl = Convert.ToSingle(Console.ReadLine());
-            if (!allowNegative && ausgangszahl < 0) {
-                throw new Exception("Kann nicht negativ sein");
+            ausgangszahl = float.Parse(Console.ReadLine());
+            if (!allowNegative && ausgangszahl < 0f) {
+                throw new Exception("Cant be negative");
+            }
+
+            if (enabledValues != null && !enabledValues.Contains(ausgangszahl)) {
+                throw new Exception("Needs to be an enabled value");
+            }
+
+            if (disabledValues != null && disabledValues.Contains(ausgangszahl)) {
+                throw new Exception("Wert darf kein ausgeschlossener Wert sein");
             }
         }
         catch (Exception e) {
             Console.WriteLine(e.Message);
-            return FloatEingabeLesen(allowNegative);
+            return FloatEingabeLesen(allowNegative, enabledValues);
         }
 
         return ausgangszahl;

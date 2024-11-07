@@ -18,7 +18,6 @@ class Program {
 
         EinkaufData einkaufData = EinkaufData.Create().WithAllManually().Build();
 
-        EinkaufHandler.Instance.RegisterEinkauf(new Einkauf(einkaufData, calculator));
+        Kunde.EinkaufHandler.Instance.RegisterEinkauf(new Einkauf(einkaufData, calculator));
     }
 }
-
